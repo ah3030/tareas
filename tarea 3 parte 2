@@ -1,0 +1,45 @@
+CREATE TABLE IF NOT EXISTS car (
+model_code SERIAL PRIMARY KEY,
+brand VARCHAR(20) NOT NULL,
+price NUMERIC(10,2) NOT NULL,
+discount NUMERIC(10,3),	
+fiscal_power NUMERIC(10,2) NOT NULL,
+displacement NUMERIC(10,5) NOT NULL	
+);
+
+CREATE TABLE IF NOT EXISTS equipment (
+equipment_code SERIAL PRIMARY KEY,
+driver_airbag VARCHAR(10) NOT NULL,
+central_locking VARCHAR(10) NOT NULL,
+air_conditioning VARCHAR(10) NOT NULL,	
+passenger_airbag VARCHAR(10) NOT NULL,
+metallic_paint VARCHAR(10) NOT NULL		
+);
+
+
+
+CREATE TABLE IF NOT EXISTS employee(
+employee_code SERIAL PRIMARY KEY,
+name VARCHAR(35) NOT NULL,
+price_sale NUMERIC(10,2) NOT NULL,	
+pay_mode VARCHAR(25) NOT NULL,
+equipment_code INT NOT NULL,	
+delivery_dates DATE NOT NULL,
+matricula VARCHAR(6) NOT NULL,	
+origin VARCHAR(15) NOT NULL,
+	
+FOREIGN KEY (equipment_code) REFERENCES equipment(equipment_code)
+);
+
+CREATE TABLE IF NOT EXISTS official_service (
+frame_id SERIAL PRIMARY KEY,
+nombre VARCHAR(25) NOT NULL,
+domicilio VARCHAR(25) NOT NULL,
+ine	VARCHAR(25) NOT NULL,
+employee_code INT NOT NULL,
+model_code INT NOT NULL,	
+
+FOREIGN KEY (employee_code) REFERENCES employee(employee_code),
+FOREIGN KEY (model_code)	REFERENCES car (model_code)	
+	
+); 

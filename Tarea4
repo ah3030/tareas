@@ -1,0 +1,28 @@
+--PREGUNTAS
+-- Obtener una lista de actores con el nombre de julia.
+SELECT * FROM actor ;
+SELECT * FROM actor WHERE first_name = 'Julia';
+
+--Obtener una lista de actores con el nombre Chris, Camaron o Cuba 
+
+SELECT * FROM actor WHERE first_name in ('Chris','Cameron','Cuba') ORDER BY first_name;
+
+--Seleccione la fila del cliente para el cliente llamado Jamie Rice.
+
+SELECT * FROM customer WHERE LOWER (first_name) = 'jamie' and LOWER (last_name) = 'rice';
+
+--Selecione el monto y la fecha de pago de la tabla payment fue inferior a $1
+SELECT * FROM payment ;
+SELECT amount, payment_date FROM payment WHERE amount <1 ORDER BY payment_date;
+
+-- cuales son los id de los ultimos 3 clientes para devolver un alquiler
+SELECT * FROM rental;
+SELECT customer_id, return_date FROM rental WHERE return_date IS NOT NULL ORDER BY return_date DESC LIMIT 3 ;
+
+-- cuales peliculas tiene la clasificacion NC-17 cuantos estan clasificados como PG O PG-13
+SELECT * FROM film;
+SELECT rating, COUNT(rating) FROM film WHERE rating IN ('PG','PG-13','NC-17') GROUP BY rating;
+-- cuenta el numero de ciudades para cada country_id en la tabla city
+--ordena por count(+)
+SELECT * FROM country;
+SELECT country_id, COUNT(*) FROM city GROUP BY country_id ORDER BY COUNT(*);
